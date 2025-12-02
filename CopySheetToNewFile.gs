@@ -6,7 +6,7 @@ function copyAllSheets() {
   Month.setMonth(Month.getMonth() - 1);
   const MonthName = Month.toLocaleString("en-US", { month: "short"});
   // Make New File N the Id
-  const newFile = SpreadsheetApp.create("Hasil Lembur " + MonthName);
+  const newFile = SpreadsheetApp.create("Hasil Laporan " + MonthName);
   const newSS = SpreadsheetApp.openById(newFile.getId());
   // Loop sheet that D4 is not null then copy Everything to new sheet and delete A3:F 
   sheets.forEach(sh => {
