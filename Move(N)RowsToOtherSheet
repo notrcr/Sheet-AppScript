@@ -1,0 +1,21 @@
+// Move Rows with "N" in Column C from " X" to "Y"
+
+function movenRows() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const formSheet = ss.getSheetByName("X");
+  const backupSheetName = "Y";
+  const backupSheet = ss.getSheetByName(backupSheetName) || ss.insertSheet(backupSheetName);
+
+  // Get all data from Web_Form_Lokasi starting from row 2
+  const dataRange = formSheet.getRange("A2:C" + formSheet.getLastRow());
+  const data = dataRange.getValues();
+
+  // Filter rows where column C is "N"
+  const nRows = data.filter(row => row[2].toString().trim().toLowerCase() === "N");
+
+  if (nRows.length === 0) return; // nothing to append
+
+  // Find next empty row in Total_Absen
+  const lastRow = backupSheet.getLastRow();
+  backupSheet.getRange(lastRow + 1, 1, masukRows.length, 3).setValues(nRows);
+}

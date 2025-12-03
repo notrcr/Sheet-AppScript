@@ -1,3 +1,5 @@
+// Copy All Sheet w Data/Value on D4 To New Files And Delete A3:F (LINE 21)
+
 function copyAllSheets() {
   const ss = SpreadsheetApp.getActive();
   const sheets = ss.getSheets();
@@ -13,7 +15,6 @@ function copyAllSheets() {
     const d4 = sh.getRange("D4").getValue();  
     
     if (d4 !== "" && d4 !== null) {
-      
       const copied = sh.copyTo(newSS);
       copied.setName(sh.getName()); 
  

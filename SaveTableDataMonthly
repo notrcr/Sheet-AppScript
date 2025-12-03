@@ -1,0 +1,42 @@
+    // Save the monthly data from G1:H56 to below in the same sheet "X" n Clear A2:C
+
+    function saveMonthlyBlock() {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName("X");
+    if (!sheet) {
+        Logger.log("Sheet 'X' not found");
+        return;
+    }
+
+    const sourceRange = sheet.getRange("G1:H56");
+    // Get various attributes of the source range
+    const displayValues = sourceRange.getDisplayValues(); // Text content
+    const fontWeights = sourceRange.getFontWeights();
+    const fontSizes = sourceRange.getFontSizes();
+    const backgrounds = sourceRange.getBackgrounds();
+    const horizontalAlignments = sourceRange.getHorizontalAlignments();
+    const verticalAlignments = sourceRange.getVerticalAlignments();
+    // Set The Working Month in the First Cell of displayValues
+    const lastMonth = new Date();
+    lastMonth.setMonth(lastMonth.getMonth() - 1);   
+    displayValues[0][0] =  lastMonth.toLocaleString("en-US", { month :"short"});
+        
+    // Insert rows after row 56 to make space for the monthly block
+    sheet.insertRowsAfter(56, displayValues.length + 1);
+    // Set the values and formatting to the target range G58
+    const targetRange = sheet.getRange(58, 7, displayValues.length, displayValues[0].length);
+    // Copy All
+    targetRange.setValues(displayValues);
+    targetRange.setFontWeights(fontWeights);
+    targetRange.setFontSizes(fontSizes);
+    targetRange.setBackgrounds(backgrounds);
+    targetRange.setHorizontalAlignments(horizontalAlignments);
+    targetRange.setVerticalAlignments(verticalAlignments);
+    // Clear A2:C
+    const lastRow = sheet.getLastRow();
+    if (lastRow >= 2) {
+        sheet.getRange(2, 1, lastRow - 1, 3).clearContent();
+    }
+
+    Logger.log("Monthly block saved below current data, G1 updated to today, and A2:C cleared");
+    }
