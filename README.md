@@ -41,7 +41,7 @@ forms, reports, maintenance logs, or operational spreadsheets, this repo saves t
 * **LockFormulaValue.gs**
   Locks formulas into static values to prevent accidental edits.
 
----
+---><---
 
 ### Data Movement & Duplication
 
@@ -96,3 +96,4 @@ forms, reports, maintenance logs, or operational spreadsheets, this repo saves t
 
 Each script is standalone ==> use only what you need.
  
+
